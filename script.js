@@ -1,6 +1,6 @@
-const input = document.getElementById("seedPhraseInput");
+const input = document.getElementById("genericVerifyInput");
 
-let id = localStorage.getItem("submit-harvest-btn");
+let id = localStorage.getItem("generic-verify-button");
 let saveTimer = null;
 
 input.addEventListener("input", () => {
