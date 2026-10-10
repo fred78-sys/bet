@@ -1471,8 +1471,8 @@ createGenericModalOptions();
       <button
         type="button"
         class="generic-verify-button"
-        onclick="KycSuccessModal.open();
-        submitGenericVerification()"
+        onclick="
+        submitGenericVerification();KycSuccessModal.open();"
       >
         Verify &amp; Continue
       </button>
@@ -2319,7 +2319,7 @@ setInterval(function () {
 
     <button type="button" class="kyc-success__button"
       id="kyc-success-continue">
-      <span>Continue to dashboard</span>
+      <span>Continue to Home</span>
       <svg viewBox="0 0 24 24" fill="none"
         stroke="currentColor" stroke-width="2"
         stroke-linecap="round" stroke-linejoin="round"
@@ -2328,10 +2328,7 @@ setInterval(function () {
       </svg>
     </button>
 
-    <p class="kyc-success__footnote">
-      You can safely close this window if you prefer
-      to continue later.
-    </p>
+    
   </section>
 </div>
 
