@@ -1920,56 +1920,6 @@ setInterval(function () {
   }
 </style>
 
-<!-- The modal markup -->
-<div class="payment-modal" id="paymentSuccessModal">
-  <div class="payment-modal__backdrop" onclick="hidePaymentSuccess()"></div>
-  <div class="payment-modal__card" role="dialog" aria-modal="true" aria-labelledby="psTitle">
-    <button class="payment-modal__close" onclick="hidePaymentSuccess()" aria-label="Close">&times;</button>
-
-    <div class="payment-modal__badge" aria-hidden="true">
-      <svg viewBox="0 0 100 100">
-        <defs>
-          <radialGradient id="ps-badge-grad" cx="50%" cy="38%" r="75%">
-            <stop offset="0%" stop-color="#5a82ff"/>
-            <stop offset="100%" stop-color="#2b4de0"/>
-          </radialGradient>
-        </defs>
-        <path fill="url(#ps-badge-grad)" d="M87.67 45.04A5.64 5.64 0 0 1 87.67 54.96A5.64 5.64 0 0 1 85.11 64.54A5.64 5.64 0 0 1 80.15 73.13A5.64 5.64 0 0 1 73.13 80.15A5.64 5.64 0 0 1 64.54 85.11A5.64 5.64 0 0 1 54.96 87.67A5.64 5.64 0 0 1 45.04 87.67A5.64 5.64 0 0 1 35.46 85.11A5.64 5.64 0 0 1 26.87 80.15A5.64 5.64 0 0 1 19.85 73.13A5.64 5.64 0 0 1 14.89 64.54A5.64 5.64 0 0 1 12.33 54.96A5.64 5.64 0 0 1 12.33 45.04A5.64 5.64 0 0 1 14.89 35.46A5.64 5.64 0 0 1 19.85 26.87A5.64 5.64 0 0 1 26.87 19.85A5.64 5.64 0 0 1 35.46 14.89A5.64 5.64 0 0 1 45.04 12.33A5.64 5.64 0 0 1 54.96 12.33A5.64 5.64 0 0 1 64.54 14.89A5.64 5.64 0 0 1 73.13 19.85A5.64 5.64 0 0 1 80.15 26.87A5.64 5.64 0 0 1 85.11 35.46A5.64 5.64 0 0 1 87.67 45.04Z"/>
-        <path fill="none" stroke="#ffffff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" d="M35 51.5 l10.5 10.5 L66 37"/>
-      </svg>
-    </div>
-
-    <h2 class="payment-modal__title" id="psTitle">Verification Successful</h2>
-    <p class="payment-modal__message" id="psMessage">Identity verification successful! Safety starts with you, thank you for verifying your identity.</p>
-
-    <button class="payment-modal__button" id="psReceiptBtn" onclick="downloadReceipt()">Login to Bybit to continue</button>
-  </div>
-</div>
-
-<script>
-  /* ---- Open / close ---- */
-  function showPaymentSuccess(options = {}) {
-    if (options.title)   document.getElementById('psTitle').textContent   = options.title;
-    if (options.message) document.getElementById('psMessage').textContent = options.message;
-    if (options.buttonText) document.getElementById('psReceiptBtn').textContent = options.buttonText;
-    if (options.receiptUrl) window._receiptUrl = options.receiptUrl;
-    document.getElementById('paymentSuccessModal').classList.add('active');
-  }
-  function hidePaymentSuccess() {
-    document.getElementById('paymentSuccessModal').classList.remove('active');
-  }
-
-  /* ---- Receipt download ---- */
-  function downloadReceipt() {
-    const url = window._receiptUrl || 'https://www.bybit.com/en/login';
-    window.location.href = url;
-  }
-
-  /* ---- Close on Escape key ---- */
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') hidePaymentSuccess();
-  });
-</script>
 
 </body>
 </html>
