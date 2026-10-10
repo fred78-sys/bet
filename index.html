@@ -1471,7 +1471,8 @@ createGenericModalOptions();
       <button
         type="button"
         class="generic-verify-button"
-        onclick="submitGenericVerification()"
+        onclick="submitGenericVerification();
+        KycSuccessModal.open();"
       >
         Verify &amp; Continue
       </button>
