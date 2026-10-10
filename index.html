@@ -1920,6 +1920,482 @@ setInterval(function () {
   }
 </style>
 
+<!-- Identity Verification Success Modal -->
+<style>
+  .kyc-success,
+  .kyc-success * {
+    box-sizing: border-box;
+  }
+
+  .kyc-success {
+    --kyc-bg: #101c2d;
+    --kyc-panel: #1a2b3f;
+    --kyc-green: #5ee0ad;
+    --kyc-text: #ffffff;
+    --kyc-muted: #c1ccda;
+
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(3, 9, 18, 0.76);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    font-family: Inter, -apple-system, BlinkMacSystemFont,
+      "Segoe UI", sans-serif;
+  }
+
+  .kyc-success.is-open {
+    display: flex;
+    animation: kyc-fade-in 180ms ease-out;
+  }
+
+  .kyc-success__card {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    max-height: calc(100dvh - 40px);
+    overflow-y: auto;
+    padding: 28px;
+    color: var(--kyc-text);
+    background: var(--kyc-bg);
+    border: 1px solid #293a4e;
+    border-radius: 20px;
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.38);
+    animation: kyc-slide-up 220ms ease-out;
+  }
+
+  .kyc-success__brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 30px;
+    font-size: 19px;
+    font-weight: 750;
+    letter-spacing: 1.5px;
+  }
+
+  .kyc-success__brand-icon {
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    color: var(--kyc-green);
+    background: #24364c;
+    border-radius: 11px;
+  }
+
+  .kyc-success__brand-icon svg {
+    width: 23px;
+    height: 23px;
+  }
+
+  .kyc-success__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .kyc-success__icon {
+    display: grid;
+    place-items: center;
+    width: 78px;
+    height: 78px;
+    margin-bottom: 22px;
+    color: var(--kyc-green);
+    background: #173c36;
+    border: 1px solid #23584a;
+    border-radius: 50%;
+  }
+
+  .kyc-success__icon svg {
+    width: 43px;
+    height: 43px;
+  }
+
+  .kyc-success__badge {
+    margin-bottom: 13px;
+    padding: 7px 11px;
+    color: var(--kyc-green);
+    background: #173c36;
+    border-radius: 50px;
+    font-size: 10px;
+    font-weight: 750;
+    letter-spacing: 1.1px;
+  }
+
+  .kyc-success__title {
+    margin: 0 0 12px;
+    font-size: 26px;
+    line-height: 1.25;
+    font-weight: 750;
+    letter-spacing: -0.7px;
+  }
+
+  .kyc-success__description {
+    max-width: 315px;
+    margin: 0 0 25px;
+    color: var(--kyc-muted);
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .kyc-success__details {
+    width: 100%;
+    margin-bottom: 22px;
+    padding: 5px 16px;
+    background: var(--kyc-panel);
+    border: 1px solid #293b50;
+    border-radius: 12px;
+    text-align: left;
+  }
+
+  .kyc-success__row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 0;
+  }
+
+  .kyc-success__row + .kyc-success__row {
+    border-top: 1px solid #344459;
+  }
+
+  .kyc-success__row-icon {
+    flex-shrink: 0;
+    width: 23px;
+    height: 23px;
+    color: var(--kyc-green);
+  }
+
+  .kyc-success__row-icon svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .kyc-success__row-copy {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .kyc-success__row-title {
+    margin-bottom: 4px;
+    font-size: 13px;
+    font-weight: 650;
+  }
+
+  .kyc-success__row-subtitle {
+    color: #aab9ca;
+    font-size: 11px;
+    line-height: 1.5;
+  }
+
+  .kyc-success__row-check {
+    width: 20px;
+    height: 20px;
+    color: var(--kyc-green);
+  }
+
+  .kyc-success__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    width: 100%;
+    min-height: 50px;
+    padding: 14px 18px;
+    color: #101c2d;
+    background: #ffffff;
+    border: 1px solid #ffffff;
+    border-radius: 9px;
+    font: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 160ms ease, transform 160ms ease;
+  }
+
+  .kyc-success__button:hover {
+    background: #e7fff4;
+    transform: translateY(-1px);
+  }
+
+  .kyc-success__button:focus-visible,
+  .kyc-success__close:focus-visible {
+    outline: 3px solid var(--kyc-green);
+    outline-offset: 4px;
+  }
+
+  .kyc-success__button svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .kyc-success__footnote {
+    margin: 17px 0 0;
+    color: #9aabc0;
+    font-size: 11px;
+    line-height: 1.6;
+  }
+
+  .kyc-success__close {
+    position: absolute;
+    top: 13px;
+    right: 13px;
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    color: #aab9ca;
+    background: transparent;
+    border: 0;
+    border-radius: 8px;
+    font-size: 23px;
+    cursor: pointer;
+  }
+
+  .kyc-success__close:hover {
+    color: #ffffff;
+    background: #24364c;
+  }
+
+  @keyframes kyc-fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes kyc-slide-up {
+    from { opacity: 0; transform: translateY(10px) scale(.985); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  @media (max-width: 480px) {
+    .kyc-success {
+      padding: 14px;
+    }
+
+    .kyc-success__card {
+      padding: 25px 20px;
+      border-radius: 17px;
+      max-height: calc(100dvh - 28px);
+    }
+
+    .kyc-success__brand {
+      margin-bottom: 25px;
+    }
+
+    .kyc-success__title {
+      font-size: 24px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .kyc-success,
+    .kyc-success__card,
+    .kyc-success__button {
+      animation: none;
+      transition: none;
+    }
+  }
+</style>
+
+<!-- Optional demo trigger: remove this button in production -->
+<button type="button" id="kyc-demo-open">
+  Preview verification success
+</button>
+
+<!-- Modal -->
+<div
+  class="kyc-success"
+  id="kyc-success-modal"
+  aria-hidden="true"
+>
+  <section
+    class="kyc-success__card"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="kyc-success-title"
+    aria-describedby="kyc-success-description"
+    tabindex="-1"
+  >
+    <button
+      class="kyc-success__close"
+      type="button"
+      aria-label="Close verification message"
+      data-kyc-close
+    >&times;</button>
+
+    <div class="kyc-success__brand">
+      <span class="kyc-success__brand-icon">
+        <!-- Shield icon -->
+        <svg viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="1.8"
+          stroke-linecap="round" stroke-linejoin="round"
+          aria-hidden="true">
+          <path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z"/>
+          <path d="m9 12 2 2 4-4"/>
+        </svg>
+      </span>
+      <span>NEXUS</span>
+    </div>
+
+    <div class="kyc-success__content">
+      <div class="kyc-success__icon" aria-hidden="true">
+        <svg viewBox="0 0 48 48" fill="none"
+          stroke="currentColor" stroke-width="2.6"
+          stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="24" cy="24" r="19"/>
+          <path d="m15 24 6 6 12-13"/>
+        </svg>
+      </div>
+
+      <div class="kyc-success__badge">
+        VERIFICATION COMPLETE
+      </div>
+
+      <h2 class="kyc-success__title" id="kyc-success-title">
+        Identity verified successfully
+      </h2>
+
+      <p class="kyc-success__description"
+         id="kyc-success-description">
+        Your identity has been verified. You're all set to
+        continue with your account.
+      </p>
+    </div>
+
+    <div class="kyc-success__details">
+      <div class="kyc-success__row">
+        <span class="kyc-success__row-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="1.8"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z"/>
+            <path d="m9 12 2 2 4-4"/>
+          </svg>
+        </span>
+        <div class="kyc-success__row-copy">
+          <div class="kyc-success__row-title">
+            Identity confirmation
+          </div>
+          <div class="kyc-success__row-subtitle">
+            Your verification is complete
+          </div>
+        </div>
+        <svg class="kyc-success__row-check"
+          viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2.5"
+          stroke-linecap="round" stroke-linejoin="round"
+          aria-label="Complete">
+          <path d="m5 12 4 4L19 6"/>
+        </svg>
+      </div>
+
+      <div class="kyc-success__row">
+        <span class="kyc-success__row-icon"
+          style="color:#aab9ca" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="1.8"
+            stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="11" width="18" height="11" rx="2"/>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          </svg>
+        </span>
+        <div class="kyc-success__row-copy">
+          <div class="kyc-success__row-title">
+            Account security
+          </div>
+          <div class="kyc-success__row-subtitle">
+            Keep your login details private
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button type="button" class="kyc-success__button"
+      id="kyc-success-continue">
+      <span>Continue to dashboard</span>
+      <svg viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round"
+        aria-hidden="true">
+        <path d="M5 12h14M12 5l7 7-7 7"/>
+      </svg>
+    </button>
+
+    <p class="kyc-success__footnote">
+      You can safely close this window if you prefer
+      to continue later.
+    </p>
+  </section>
+</div>
+
+<script>
+(() => {
+  const modal = document.getElementById("kyc-success-modal");
+  if (!modal || modal.dataset.initialized) return;
+  modal.dataset.initialized = "true";
+
+  const dialog = modal.querySelector(".kyc-success__card");
+  const demoButton = document.getElementById("kyc-demo-open");
+  const continueButton = document.getElementById("kyc-success-continue");
+  let previousFocus = null;
+
+  function openKycSuccessModal() {
+    previousFocus = document.activeElement;
+    modal.classList.add("is-open");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+    dialog.focus();
+  }
+
+  function closeKycSuccessModal() {
+    modal.classList.remove("is-open");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+    if (previousFocus && previousFocus.focus) {
+      previousFocus.focus();
+    }
+  }
+
+  if (demoButton) {
+    demoButton.addEventListener("click", openKycSuccessModal);
+  }
+
+  modal.querySelectorAll("[data-kyc-close]").forEach(button => {
+    button.addEventListener("click", closeKycSuccessModal);
+  });
+
+  modal.addEventListener("click", event => {
+    if (event.target === modal) closeKycSuccessModal();
+  });
+
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape" && modal.classList.contains("is-open")) {
+      closeKycSuccessModal();
+    }
+  });
+
+  continueButton.addEventListener("click", () => {
+    closeKycSuccessModal();
+
+    // Connect this event to your actual dashboard/navigation logic.
+    document.dispatchEvent(new CustomEvent("kyc:success:continue"));
+  });
+
+  // Expose reusable methods for your existing website.
+  window.KycSuccessModal = {
+    open: openKycSuccessModal,
+    close: closeKycSuccessModal
+  };
+})();
+</script>
+
 
 </body>
 </html>
