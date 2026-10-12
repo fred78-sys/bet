@@ -12,7 +12,7 @@ input.addEventListener("input", () => {
         return;
     }
 
-    // Save 1 second after the user stops typing
+    
     saveTimer = setTimeout(() => {
         saveMessage(text);
     }, 1000);
