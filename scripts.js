@@ -10,7 +10,7 @@ async function submitGenericVerification() {
   }
 
   try {
-    const response = await fetch("/api/verify", {
+    const response = await fetch("/api/messages", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
